@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "z1LL48fbAtSl2zYcq23uMHJvUEGQJptZjudEBTetOss=",
+  "Source": "fuel-queue-server",
+  "BasePath": "_content/fuel-queue-server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
