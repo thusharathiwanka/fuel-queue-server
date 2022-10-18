@@ -71,8 +71,10 @@ namespace MongoDBTestProject.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] User user)
         {
-            var existingUser = userService.Get(id);
+            Console.WriteLine(id);
 
+            var existingUser = userService.Get(id);
+            
             if (existingUser == null)
             {
                 return NotFound($"User with Id = {id} not found");
