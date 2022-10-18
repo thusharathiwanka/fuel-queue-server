@@ -22,7 +22,7 @@ namespace fuel_queue_server.Models
         [BsonElement("vehicleType")]
         public String VehicleType { get; set; } = String.Empty;
 
-        public User() { }
+        public User() {}
     }
 }
 

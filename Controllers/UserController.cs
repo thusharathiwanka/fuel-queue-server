@@ -45,7 +45,27 @@ namespace MongoDBTestProject.Controllers
             return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
         }
 
-        // PUT api/<UserController>
+        // POST api/<UserController>
+        [HttpPost("login")]
+        public ActionResult<User> Login([FromBody] User request)
+        {
+            if (request.Username == null || request.Password == null)
+            {
+                return BadRequest("Please provide username and password");
+            }
+
+            var existingUser = userService.Login(request.Username, request.Password);
+
+            if (existingUser == null)
+            {
+                return NotFound($"User with username = {request.Username} not found");
+            }
+           
+
+            return Ok(existingUser);
+        }
+
+        // PUT api/<UserController>/5
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] User user)
         {
