@@ -71,7 +71,6 @@ namespace MongoDBTestProject.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] User user)
         {
-            Console.WriteLine(id);
 
             var existingUser = userService.Get(id);
             
