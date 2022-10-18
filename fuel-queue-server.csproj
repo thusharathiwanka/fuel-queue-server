@@ -21,7 +21,6 @@
     <None Remove="MongoDB.Driver" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
     <Folder Include="Models\Database\" />
     <Folder Include="Services\User\" />
   </ItemGroup>
