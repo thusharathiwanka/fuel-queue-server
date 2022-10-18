@@ -14,7 +14,7 @@ namespace fuel_queue_server.Models
         public string Username { get; set; } = String.Empty;
 
         [BsonElement("password")]
-        public string Password { get; set; }
+        public string Password { get; set; } = String.Empty;
 
         [BsonElement("role")]
         public String Role { get; set; } = String.Empty;
@@ -22,7 +22,7 @@ namespace fuel_queue_server.Models
         [BsonElement("vehicleType")]
         public String VehicleType { get; set; } = String.Empty;
 
-        public User() { }
+        public User() {}
     }
 }
 
