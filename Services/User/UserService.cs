@@ -3,6 +3,8 @@ using MongoDB.Driver;
 using fuel_queue_server.Models;
 using fuel_queue_server.Services;
 using fuel_queue_server.Models.Database;
+using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace fuel_queue_server.Services
 {
@@ -41,6 +43,11 @@ namespace fuel_queue_server.Services
         public void Update(string id, User user)
         {
             _user.ReplaceOne(user => user.Id == id, user);
+        }
+
+        public User Login(string username, string password)
+        {
+            return _user.Find(user => user.Username == username && user.Password == password).FirstOrDefault();
         }
     }
 }
