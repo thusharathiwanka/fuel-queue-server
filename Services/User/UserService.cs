@@ -4,6 +4,7 @@ using fuel_queue_server.Models;
 using fuel_queue_server.Services;
 using fuel_queue_server.Models.Database;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace fuel_queue_server.Services
 {
@@ -46,13 +47,7 @@ namespace fuel_queue_server.Services
 
         public User Login(string username, string password)
         {
-            var document = new BsonDocument
-            {
-                { "username", username },
-                { "password", password}
-            };
-
-            return _user.Find(document).FirstOrDefault();
+            return _user.Find(user => user.Username == username && user.Password == password).FirstOrDefault();
         }
     }
 }

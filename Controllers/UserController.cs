@@ -54,6 +54,8 @@ namespace MongoDBTestProject.Controllers
                 return BadRequest("Please provide username and password");
             }
 
+            Console.Write("Req" + request.Username);
+
             var existingUser = userService.Login(request.Username, request.Password);
 
             if (existingUser == null)
