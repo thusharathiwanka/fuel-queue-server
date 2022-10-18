@@ -14,7 +14,7 @@ namespace fuel_queue_server.Models
         public string Username { get; set; } = String.Empty;
 
         [BsonElement("password")]
-        public byte[]? Password { get; set; }
+        public string Password { get; set; }
 
         [BsonElement("role")]
         public String Role { get; set; } = String.Empty;

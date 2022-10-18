@@ -2,7 +2,7 @@
 using MongoDB.Driver;
 using fuel_queue_server.Models;
 using fuel_queue_server.Services;
-using fuel_queue_server.Controllers.Database;
+using fuel_queue_server.Models.Database;
 
 namespace fuel_queue_server.Services
 {
@@ -12,6 +12,7 @@ namespace fuel_queue_server.Services
 
         public UserService(IStoreDatabaseSettings settings, IMongoClient mongoClient)
         {
+            Console.Write(settings.ConnectionString);
             var database = mongoClient.GetDatabase(settings.DatabaseName);
             _user = database.GetCollection<User>(settings.UserCollectionName);
         }
@@ -30,7 +31,6 @@ namespace fuel_queue_server.Services
         public List<User> Get()
         {
             return _user.Find(user => true).ToList();
-
         }
 
         public User Get(string id)

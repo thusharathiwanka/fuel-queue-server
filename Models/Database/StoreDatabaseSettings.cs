@@ -1,5 +1,5 @@
 ﻿using System;
-namespace fuel_queue_server.Controllers.Database
+namespace fuel_queue_server.Models.Database
 {
     public class StoreDatabaseSettings : IStoreDatabaseSettings
     {

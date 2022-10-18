@@ -1,4 +1,4 @@
-﻿using fuel_queue_server.Controllers.Database;
+﻿using fuel_queue_server.Models.Database;
 using fuel_queue_server.Services;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -12,7 +12,7 @@ builder.Services.Configure<StoreDatabaseSettings>(
 builder.Services.AddSingleton<IStoreDatabaseSettings>(sp =>
     sp.GetRequiredService<IOptions<StoreDatabaseSettings>>().Value);
 
-builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configuration.GetValue<string>("DatabaseSettings:ConnectionString")));
+builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configuration.GetValue<string>("StoreDatabaseSettings:ConnectionString")));
 
 builder.Services.AddScoped<IUserService, UserService>();
 
