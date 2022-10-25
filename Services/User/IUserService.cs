@@ -7,7 +7,7 @@ namespace fuel_queue_server.Services
     {
         List<User> Get();
         User Get(string id);
-        User Login(string username, string password);
+        User Login(string username, string password, string role);
         User Create(User user);
         void Update(string id, User user);
         void Delete(string id);

@@ -45,9 +45,9 @@ namespace fuel_queue_server.Services
             _user.ReplaceOne(user => user.Id == id, user);
         }
 
-        public User Login(string username, string password)
+        public User Login(string username, string password, string role)
         {
-            return _user.Find(user => user.Username == username && user.Password == password).FirstOrDefault();
+            return _user.Find(user => user.Username == username && user.Password == password && user.Role == role).FirstOrDefault();
         }
     }
 }

@@ -49,14 +49,12 @@ namespace MongoDBTestProject.Controllers
         [HttpPost("login")]
         public ActionResult<User> Login([FromBody] User request)
         {
-            if (request.Username == null || request.Password == null)
+            if (request.Username == null || request.Password == null || request.Role == null)
             {
                 return BadRequest("Please provide username and password");
             }
 
-            Console.Write("Req" + request.Username);
-
-            var existingUser = userService.Login(request.Username, request.Password);
+            var existingUser = userService.Login(request.Username, request.Password, request.Role);
 
             if (existingUser == null)
             {
@@ -71,7 +69,6 @@ namespace MongoDBTestProject.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] User user)
         {
-            Console.WriteLine(id);
 
             var existingUser = userService.Get(id);
             
