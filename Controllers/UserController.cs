@@ -2,8 +2,9 @@
 using fuel_queue_server.Models;
 using fuel_queue_server.Services;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+/*
+* UserController: class Implements ControllerBase: interface - Manages user routes and service mappings
+*/
 namespace MongoDBTestProject.Controllers
 {
     [Route("api/[controller]")]
@@ -17,7 +18,8 @@ namespace MongoDBTestProject.Controllers
             this.userService = userService;
         }
 
-        // GET: api/<UserController>
+        // GET api/<UserController>
+        // Handles - Get all users
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
@@ -25,6 +27,7 @@ namespace MongoDBTestProject.Controllers
         }
 
         // GET api/<UserController>/5
+        // Handles - Get user for given user id
         [HttpGet("{id}")]
         public ActionResult<User> Get(String id)
         {
@@ -38,6 +41,7 @@ namespace MongoDBTestProject.Controllers
         }
 
         // POST api/<UserController>
+        // Handles - Register user
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
@@ -46,6 +50,7 @@ namespace MongoDBTestProject.Controllers
         }
 
         // POST api/<UserController>
+        // Handles - Login user
         [HttpPost("login")]
         public ActionResult<User> Login([FromBody] User request)
         {
@@ -66,6 +71,7 @@ namespace MongoDBTestProject.Controllers
         }
 
         // PUT api/<UserController>/5
+        // Handles - Update user for gievn user id
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] User user)
         {
@@ -83,6 +89,7 @@ namespace MongoDBTestProject.Controllers
         }
 
         // DELETE api/<StudentController>/5
+        // Handles - Delete user for given user id
         [HttpDelete("{id}")]
         public ActionResult Delete(String id)
         {

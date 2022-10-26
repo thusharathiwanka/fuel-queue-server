@@ -2,14 +2,14 @@
 using fuel_queue_server.Services;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+/*
+* FuelStationController: class Implements ControllerBase: interface - Manages fuel station routes and service mappings
+*/
 namespace fuel_queue_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class FuelStationController : ControllerBase
-
     {
         private readonly IFuelStationService fuelStationService;
 
@@ -19,6 +19,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // GET: api/<FuelStationController>
+        // Handles - Get all fuel stations
         [HttpGet]
         public ActionResult<List<FuelStation>> Get()
         {
@@ -26,6 +27,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // GET api/<FuelStationController>/5
+        // Handles - Get fuel station for given fuel station id
         [HttpGet("{id}")]
         public ActionResult<FuelStation> Get(String id)
         {
@@ -39,6 +41,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // POST api/<FuelStationController>
+        // Handles - Register fuel station
         [HttpPost]
         public ActionResult<FuelStation> Post([FromBody] FuelStation fuelStation)
         {
@@ -47,6 +50,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // PUT api/<FuelStationController>/5
+        // Handles - Update fuel station for gievn fuel station id
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] FuelStation fuelStation)
         {
@@ -63,6 +67,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // DELETE api/<FuelStationController>/5
+        // Handles - Delete fuel station for given fuel station id
         [HttpDelete("{id}")]
         public ActionResult Delete(String id)
         {
