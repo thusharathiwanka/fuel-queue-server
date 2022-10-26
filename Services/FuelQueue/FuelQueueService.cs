@@ -34,13 +34,34 @@ namespace fuel_queue_server.Services
 
         }
 
-        public void RemoveUsersFromQueue(string fuelStation, string customer, string detailedStatus)
+        public bool RemoveUsersFromQueue(string fuelStation, string customer, string detailedStatus)
         {
+            var fuelQueue = _fuelQueue.Find(fuelQueue => fuelQueue.FuelStationId == fuelStation).FirstOrDefault();
+
+            List<QueueCustomer> queueCustomers = fuelQueue.Customers.ToList();
+
+            foreach(QueueCustomer queueCustomer in queueCustomers)
+            {
+                if(queueCustomer.UserId == customer)
+                {
+                    queueCustomer.Status = false;
+                    queueCustomer.DetailedStatus = detailedStatus;
+                }
+            }
+
             var filter = Builders<FuelQueue>
              .Filter.Eq(e => e.FuelStationId, fuelStation);
+            var update = Builders<FuelQueue>.Update.Set("customers", queueCustomers);
 
-            Builders<FuelQueue>.Update.Set(x => x.Customers[-1].DetailedStatus, detailedStatus);
-            Builders<FuelQueue>.Update.Set(x => x.Customers[-1].Status, false);
+            var result = _fuelQueue.UpdateOne(Builders<FuelQueue>
+             .Filter.Eq(e => e.FuelStationId, fuelStation), update);
+
+            if (result == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public FuelQueue Create(FuelQueue fuelQueue)

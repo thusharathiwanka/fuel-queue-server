@@ -53,6 +53,15 @@ namespace fuel_queue_server.Controllers
             return CreatedAtAction(nameof(Get), new { status = isUpdated }, queueCustomer);
         }
 
+        // POST api/<UserController>
+        [HttpPut("/leave/{id}")]
+        public ActionResult<FuelQueue> Put(string id, [FromBody] QueueCustomer queueCustomer)
+        {
+            bool isUpdated = fuelQueueService.RemoveUsersFromQueue(id, queueCustomer.UserId, queueCustomer.DetailedStatus);
+
+            return CreatedAtAction(nameof(Get), new { status = isUpdated }, queueCustomer);
+        }
+
         // PUT api/<UserController>
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] FuelQueue fuelQueue)

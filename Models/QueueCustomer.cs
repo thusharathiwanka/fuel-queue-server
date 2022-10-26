@@ -20,7 +20,7 @@ namespace fuel_queue_server.Models
         public string enteredTime { get; set; } = String.Empty;
 
         [BsonElement("exitedTime")]
-        public string exsitedTime { get; set; } = String.Empty;
+        public string exitedTime { get; set; } = String.Empty;
 
         public QueueCustomer() {}
     }
