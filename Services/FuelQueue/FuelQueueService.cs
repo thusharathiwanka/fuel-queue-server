@@ -18,15 +18,19 @@ namespace fuel_queue_server.Services
 
         public bool AddUsersToQueue(QueueCustomer queueCustomer, string fuelStation)
         {
-            var filter = Builders<FuelQueue>
+            var fuleStationFilter = Builders<FuelQueue>
              .Filter.Eq(e => e.FuelStationId, fuelStation);
 
-            var update = Builders<FuelQueue>.Update
+            var fuelQueueUpdate = Builders<FuelQueue>.Update
                     .Push(e => e.Customers, queueCustomer);
 
-            var result = _fuelQueue.UpdateOne(filter, update);
+            var fuelQueueIncrementUpdate = Builders<FuelQueue>.Update
+                    .Inc(e => e.NumberOfVehicles, 1);
 
-            if (result == null) {
+            var fuelQueueUpdateResult = _fuelQueue.UpdateOne(fuleStationFilter, fuelQueueUpdate);
+            var incrementUpdateResult = _fuelQueue.UpdateOne(fuleStationFilter, fuelQueueIncrementUpdate);
+
+            if (fuelQueueUpdateResult == null || incrementUpdateResult == null) {
                 return false;
             }
 
@@ -34,13 +38,34 @@ namespace fuel_queue_server.Services
 
         }
 
-        public void RemoveUsersFromQueue(string fuelStation, string customer, string detailedStatus)
+        public bool RemoveUsersFromQueue(string fuelStation, string customer, string detailedStatus)
         {
+            var fuelQueue = _fuelQueue.Find(fuelQueue => fuelQueue.FuelStationId == fuelStation).FirstOrDefault();
+
+            List<QueueCustomer> queueCustomers = fuelQueue.Customers.ToList();
+
+            foreach(QueueCustomer queueCustomer in queueCustomers)
+            {
+                if(queueCustomer.UserId == customer)
+                {
+                    queueCustomer.Status = false;
+                    queueCustomer.DetailedStatus = detailedStatus;
+                }
+            }
+
             var filter = Builders<FuelQueue>
              .Filter.Eq(e => e.FuelStationId, fuelStation);
+            var update = Builders<FuelQueue>.Update.Set("customers", queueCustomers);
 
-            Builders<FuelQueue>.Update.Set(x => x.Customers[-1].DetailedStatus, detailedStatus);
-            Builders<FuelQueue>.Update.Set(x => x.Customers[-1].Status, false);
+            var result = _fuelQueue.UpdateOne(Builders<FuelQueue>
+             .Filter.Eq(e => e.FuelStationId, fuelStation), update);
+
+            if (result == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public FuelQueue Create(FuelQueue fuelQueue)

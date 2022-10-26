@@ -8,7 +8,6 @@ namespace fuel_queue_server.Controllers
     [ApiController]
     public class FuelQueueController : ControllerBase
     {
-
         private readonly IFuelQueueService fuelQueueService;
 
         public FuelQueueController(IFuelQueueService fuelQueueService)
@@ -49,6 +48,15 @@ namespace fuel_queue_server.Controllers
         public ActionResult<FuelQueue> Post(string id, [FromBody] QueueCustomer queueCustomer)
         {
             bool isUpdated = fuelQueueService.AddUsersToQueue(queueCustomer, id);
+
+            return CreatedAtAction(nameof(Get), new { status = isUpdated }, queueCustomer);
+        }
+
+        // POST api/<UserController>
+        [HttpPut("/leave/{id}")]
+        public ActionResult<FuelQueue> Put(string id, [FromBody] QueueCustomer queueCustomer)
+        {
+            bool isUpdated = fuelQueueService.RemoveUsersFromQueue(id, queueCustomer.UserId, queueCustomer.DetailedStatus);
 
             return CreatedAtAction(nameof(Get), new { status = isUpdated }, queueCustomer);
         }
