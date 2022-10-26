@@ -7,7 +7,7 @@ using MongoDB.Bson;
 using System.Collections.Generic;
 
 /*
-* UserService: class Implements IUserInterface: interface - Manages user operations
+* UserService: class Implements IUserInterface: interface - Manages user operations on database
 */
 namespace fuel_queue_server.Services
 {

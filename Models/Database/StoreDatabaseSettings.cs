@@ -1,4 +1,8 @@
 ﻿using System;
+
+/*
+* StoreDatabaseSettings: class Implements IStoreDatabaseSettings: interface - Manages database configs and collection names
+*/
 namespace fuel_queue_server.Models.Database
 {
     public class StoreDatabaseSettings : IStoreDatabaseSettings

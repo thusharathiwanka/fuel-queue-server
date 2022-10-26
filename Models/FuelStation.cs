@@ -2,6 +2,9 @@
 using System;
 using MongoDB.Bson;
 
+/*
+* FuelStation: class - Represents fuel station model in database
+*/
 namespace fuel_queue_server.Models
 {
     [BsonIgnoreExtraElements]

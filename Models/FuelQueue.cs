@@ -1,5 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+
+/*
+* FuelQueue: class - Represents fuel queue model in database
+*/
 namespace fuel_queue_server.Models
 {
     public class FuelQueue

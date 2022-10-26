@@ -1,6 +1,9 @@
 ﻿using System;
 using fuel_queue_server.Models;
 
+/*
+* IUserInterface: interface - Interface for manage user operations on database
+*/
 namespace fuel_queue_server.Services
 {
     public interface IUserService
