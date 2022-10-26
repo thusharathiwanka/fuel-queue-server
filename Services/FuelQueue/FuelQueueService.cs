@@ -5,7 +5,7 @@ using fuel_queue_server.Models;
 using MongoDB.Driver;
 
 /*
-* FuelQueueService: class Implements IFuelQueueService: interface - Manages fuel queue operations
+* FuelQueueService: class Implements IFuelQueueService: interface - Manages fuel queue operations on database
 */
 namespace fuel_queue_server.Services
 {

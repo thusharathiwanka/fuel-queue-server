@@ -4,7 +4,7 @@ using MongoDB.Driver;
 using static System.Collections.Specialized.BitVector32;
 
 /*
-* FuleStationService: class Implements IFuleStationService: interface - Manages fuel station operations
+* FuleStationService: class Implements IFuleStationService: interface - Manages fuel station operations on database
 */
 namespace fuel_queue_server.Services
 {
