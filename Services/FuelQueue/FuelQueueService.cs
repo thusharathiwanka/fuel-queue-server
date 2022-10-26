@@ -18,15 +18,19 @@ namespace fuel_queue_server.Services
 
         public bool AddUsersToQueue(QueueCustomer queueCustomer, string fuelStation)
         {
-            var filter = Builders<FuelQueue>
+            var fuleStationFilter = Builders<FuelQueue>
              .Filter.Eq(e => e.FuelStationId, fuelStation);
 
-            var update = Builders<FuelQueue>.Update
+            var fuelQueueUpdate = Builders<FuelQueue>.Update
                     .Push(e => e.Customers, queueCustomer);
 
-            var result = _fuelQueue.UpdateOne(filter, update);
+            var fuelQueueIncrementUpdate = Builders<FuelQueue>.Update
+                    .Inc(e => e.NumberOfVehicles, 1);
 
-            if (result == null) {
+            var fuelQueueUpdateResult = _fuelQueue.UpdateOne(fuleStationFilter, fuelQueueUpdate);
+            var incrementUpdateResult = _fuelQueue.UpdateOne(fuleStationFilter, fuelQueueIncrementUpdate);
+
+            if (fuelQueueUpdateResult == null || incrementUpdateResult == null) {
                 return false;
             }
 

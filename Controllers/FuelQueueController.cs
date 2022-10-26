@@ -8,7 +8,6 @@ namespace fuel_queue_server.Controllers
     [ApiController]
     public class FuelQueueController : ControllerBase
     {
-
         private readonly IFuelQueueService fuelQueueService;
 
         public FuelQueueController(IFuelQueueService fuelQueueService)
