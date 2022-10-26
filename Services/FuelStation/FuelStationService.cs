@@ -12,7 +12,6 @@ namespace fuel_queue_server.Services
 
         public FuelStationService(IStoreDatabaseSettings settings, IMongoClient mongoClient)
         {
-            Console.Write(settings.ConnectionString);
             var database = mongoClient.GetDatabase(settings.DatabaseName);
             _fuelStation = database.GetCollection<FuelStation>(settings.StationCollectionName);
         }
