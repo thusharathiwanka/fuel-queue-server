@@ -12,9 +12,35 @@ namespace fuel_queue_server.Services
 
         public FuelQueueService(IStoreDatabaseSettings settings, IMongoClient mongoClient)
         {
-            Console.Write(settings.ConnectionString);
             var database = mongoClient.GetDatabase(settings.DatabaseName);
             _fuelQueue = database.GetCollection<FuelQueue>(settings.FuelQueueCollectionName);
+        }
+
+        public bool AddUsersToQueue(QueueCustomer queueCustomer, string fuelStation)
+        {
+            var filter = Builders<FuelQueue>
+             .Filter.Eq(e => e.FuelStationId, fuelStation);
+
+            var update = Builders<FuelQueue>.Update
+                    .Push(e => e.Customers, queueCustomer);
+
+            var result = _fuelQueue.UpdateOne(filter, update);
+
+            if (result == null) {
+                return false;
+            }
+
+            return true;
+
+        }
+
+        public void RemoveUsersFromQueue(string fuelStation, string customer, string detailedStatus)
+        {
+            var filter = Builders<FuelQueue>
+             .Filter.Eq(e => e.FuelStationId, fuelStation);
+
+            Builders<FuelQueue>.Update.Set(x => x.Customers[-1].DetailedStatus, detailedStatus);
+            Builders<FuelQueue>.Update.Set(x => x.Customers[-1].Status, false);
         }
 
         public FuelQueue Create(FuelQueue fuelQueue)

@@ -7,7 +7,6 @@ namespace fuel_queue_server.Models
     [BsonIgnoreExtraElements]
     public class FuelStation
     {
-
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = String.Empty;
