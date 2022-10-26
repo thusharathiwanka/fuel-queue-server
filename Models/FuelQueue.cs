@@ -11,11 +11,12 @@ namespace fuel_queue_server.Models
         [BsonElement("fuelStationId")]
         public string FuelStationId { get; set; } = String.Empty;
 
-        [BsonElement("numberOfVehicle")]
-        public int NumberOfVehicle { get; set; }
+        [BsonElement("numberOfVehicles")]
+        public int NumberOfVehicles { get; set; } = 0;
 
-        [BsonElement("userId")]
-        public int UserId { get; set; }
-        public FuelQueue() { }
+        [BsonElement("customers")]
+        public QueueCustomer[] Customers { get; set; } = Array.Empty<QueueCustomer>();
+
+        public FuelQueue() {}
     }
 }

@@ -16,6 +16,7 @@ namespace fuel_queue_server.Services
             var database = mongoClient.GetDatabase(settings.DatabaseName);
             _fuelStation = database.GetCollection<FuelStation>(settings.StationCollectionName);
         }
+
         FuelStation IFuelStationService.Create(FuelStation fuelStation)
         {
             _fuelStation.InsertOne(fuelStation);

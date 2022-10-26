@@ -44,6 +44,15 @@ namespace fuel_queue_server.Controllers
             return CreatedAtAction(nameof(Get), new { id = fuelQueue.Id }, fuelQueue);
         }
 
+        // POST api/<UserController>
+        [HttpPost("/join/{id}")]
+        public ActionResult<FuelQueue> Post(string id, [FromBody] QueueCustomer queueCustomer)
+        {
+            bool isUpdated = fuelQueueService.AddUsersToQueue(queueCustomer, id);
+
+            return CreatedAtAction(nameof(Get), new { status = isUpdated }, queueCustomer);
+        }
+
         // PUT api/<UserController>
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] FuelQueue fuelQueue)
