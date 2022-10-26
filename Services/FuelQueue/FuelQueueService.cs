@@ -18,6 +18,9 @@ namespace fuel_queue_server.Services
 
         public bool AddUsersToQueue(QueueCustomer queueCustomer, string fuelStation)
         {
+            queueCustomer.enteredTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
+            queueCustomer.exitedTime = "";
+
             var fuelStationFilter = Builders<FuelQueue>
              .Filter.Eq(e => e.FuelStationId, fuelStation);
 
@@ -46,10 +49,11 @@ namespace fuel_queue_server.Services
 
             foreach (QueueCustomer queueCustomer in queueCustomers)
             {
-                if (queueCustomer.UserId == customer)
+                if (queueCustomer.UserId == customer && queueCustomer.Status)
                 {
                     queueCustomer.Status = false;
                     queueCustomer.DetailedStatus = detailedStatus;
+                    queueCustomer.exitedTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
                 }
             }
 
