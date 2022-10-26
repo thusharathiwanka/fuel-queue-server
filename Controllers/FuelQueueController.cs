@@ -2,6 +2,9 @@
 using fuel_queue_server.Models;
 using fuel_queue_server.Services;
 
+/*
+* FuelQueueController: class Implements ControllerBase: interface - Manages fuel queue routes and service mappings
+*/
 namespace fuel_queue_server.Controllers
 {
     [Route("api/[controller]")]
@@ -15,7 +18,8 @@ namespace fuel_queue_server.Controllers
             this.fuelQueueService = fuelQueueService;
         }
 
-        // GET: api/<UserController>
+        // GET api/<UserController>
+        // Handles - Get all fuel queues
         [HttpGet]
         public ActionResult<List<FuelQueue>> Get()
         {
@@ -23,6 +27,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // GET api/<UserController>/5
+        // Handles - Get fuel queue for given fuel queue id
         [HttpGet("{id}")]
         public ActionResult<FuelQueue> Get(String id)
         {
@@ -36,6 +41,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // POST api/<UserController>
+        // Handles - Register fuel queue
         [HttpPost]
         public ActionResult<FuelQueue> Post([FromBody] FuelQueue fuelQueue)
         {
@@ -43,7 +49,8 @@ namespace fuel_queue_server.Controllers
             return CreatedAtAction(nameof(Get), new { id = fuelQueue.Id }, fuelQueue);
         }
 
-        // POST api/<UserController>
+        // POST api/<UserController>/5
+        // Handles - Join customer to fuel queue
         [HttpPost("/join/{id}")]
         public ActionResult<FuelQueue> Post(string id, [FromBody] QueueCustomer queueCustomer)
         {
@@ -52,7 +59,8 @@ namespace fuel_queue_server.Controllers
             return CreatedAtAction(nameof(Get), new { status = isUpdated }, queueCustomer);
         }
 
-        // POST api/<UserController>
+        // PUT api/<UserController>/5
+        // Handles - Leave customer from fuel queue
         [HttpPut("/leave/{id}")]
         public ActionResult<FuelQueue> Put(string id, [FromBody] QueueCustomer queueCustomer)
         {
@@ -62,6 +70,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // PUT api/<UserController>
+        // Handles - Update fuel queue for gievn fuel queue id
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] FuelQueue fuelQueue)
         {
@@ -78,6 +87,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // DELETE api/<StudentController>/5
+        // Handles - Delete fuel queue for given fuel queue id
         [HttpDelete("{id}")]
         public ActionResult Delete(String id)
         {

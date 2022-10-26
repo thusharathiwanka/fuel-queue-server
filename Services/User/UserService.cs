@@ -7,14 +7,16 @@ using MongoDB.Bson;
 using System.Collections.Generic;
 
 /*
-* Manages user operations
+* UserService: class Implements IUserInterface: interface - Manages user operations on database
 */
 namespace fuel_queue_server.Services
 {
     public class UserService : IUserService
     {
+        // variable to hold mongodb collection
         private readonly IMongoCollection<User> _user;
 
+        // constructor - retrives collections and assign collection to _user
         public UserService(IStoreDatabaseSettings settings, IMongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(settings.DatabaseName);
@@ -22,10 +24,10 @@ namespace fuel_queue_server.Services
         }
 
         /*
-         * Function - Registering users
-         * Params - user(User) - User object to register
-         * Returns - registered user(User)
-         */
+        * Function - Registering users
+        * Params - user(User) - User object to register
+        * Returns - registered user(User)
+        */
         public User Create(User user)
         {
             _user.InsertOne(user);
@@ -33,10 +35,10 @@ namespace fuel_queue_server.Services
         }
 
         /*
-         * Function - Deleting users
-         * Params - id(string) - user id to remove
-         * Returns - void
-         */
+        * Function - Deleting users
+        * Params - id(string) - user id to remove
+        * Returns - void
+        */
         public void Delete(string id)
         {
             _user.DeleteOne(user => user.Id == id);

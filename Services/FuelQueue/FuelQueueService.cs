@@ -5,15 +5,16 @@ using fuel_queue_server.Models;
 using MongoDB.Driver;
 
 /*
-* Manages fuel queue operations
+* FuelQueueService: class Implements IFuelQueueService: interface - Manages fuel queue operations on database
 */
-
 namespace fuel_queue_server.Services
 {
     public class FuelQueueService : IFuelQueueService
     {
+        // variable to hold mongodb collection
         private readonly IMongoCollection<FuelQueue> _fuelQueue;
 
+        // constructor - retrives collections and assign collection to _fuelQueue
         public FuelQueueService(IStoreDatabaseSettings settings, IMongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(settings.DatabaseName);
@@ -108,27 +109,52 @@ namespace fuel_queue_server.Services
             return true;
         }
 
+        /*
+         * Function - Register fuel queue to the fuel station
+         * Params - fuelQueue(FuelQueue) - FuelQueue object to register
+         * Returns - registered fuel queue(FuelQueue)
+         */
         public FuelQueue Create(FuelQueue fuelQueue)
         {
             _fuelQueue.InsertOne(fuelQueue);
             return fuelQueue;
         }
 
+        /*
+        * Function - Deleting fuel queue
+        * Params - id(string) - fuel queue id to remove
+        * Returns - void
+        */
         public void Delete(string id)
         {
             _fuelQueue.DeleteOne(fuelQueue => fuelQueue.Id == id);
         }
 
+        /*
+        * Function - Retrieving fuel queues
+        * Params - no params
+        * Returns - List<FuelQueue> list of fuel queue objects
+        */
         public List<FuelQueue> Get()
         {
             return _fuelQueue.Find(fuelQueue => true).ToList();
         }
 
+        /*
+        * Function - Retrieving fuel queue
+        * Params - id(string) - fuel queue id to retrive
+        * Returns - FuelQueue fuelQueue object associated with id
+        */
         public FuelQueue Get(string id)
         {
             return _fuelQueue.Find(fuelQueue => fuelQueue.Id == id).FirstOrDefault();
         }
 
+        /*
+        * Function - Updating fuel queue
+        * Params - id(string) - fuel queue id to retrive
+        * Returns - FuelQueue fuel queue object associated with id
+        */
         public void Update(string id, FuelQueue fuelQueue)
         {
             _fuelQueue.ReplaceOne(fuelQueue => fuelQueue.Id == id, fuelQueue);

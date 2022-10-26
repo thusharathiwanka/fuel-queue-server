@@ -2,6 +2,9 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
+/*
+* QueueCustomer: class - Represents queue customer model in database
+*/
 namespace fuel_queue_server.Models
 {
     [BsonIgnoreExtraElements]
