@@ -51,8 +51,8 @@ namespace fuel_queue_server.Controllers
 
         // POST api/<UserController>/5
         // Handles - Join customer to fuel queue
-        [HttpPost("/join/{id}")]
-        public ActionResult<FuelQueue> Post(string id, [FromBody] QueueCustomer queueCustomer)
+        [HttpPost("join/{id}")]
+        public ActionResult<FuelQueue> Join(string id, [FromBody] QueueCustomer queueCustomer)
         {
             bool isUpdated = fuelQueueService.AddUsersToQueue(queueCustomer, id);
 
@@ -61,8 +61,8 @@ namespace fuel_queue_server.Controllers
 
         // PUT api/<UserController>/5
         // Handles - Leave customer from fuel queue
-        [HttpPut("/leave/{id}")]
-        public ActionResult<FuelQueue> Put(string id, [FromBody] QueueCustomer queueCustomer)
+        [HttpPut("leave/{id}")]
+        public ActionResult<FuelQueue> Leave(string id, [FromBody] QueueCustomer queueCustomer)
         {
             bool isUpdated = fuelQueueService.RemoveUsersFromQueue(id, queueCustomer.UserId, queueCustomer.DetailedStatus);
 
