@@ -11,6 +11,7 @@ namespace fuel_queue_server.Services
         List<FuelQueue> Get();
         FuelQueue Get(string id);
         FuelQueue Create(FuelQueue fuelQueue);
+        FuelQueue GetFuelQueueByFuelStationId(string id);
         void Update(string id, FuelQueue fuelQueue);
         bool AddUsersToQueue(QueueCustomer queueCustomer, string fuelStation);
         bool RemoveUsersFromQueue(string fuelStation, string customer, string detailedStatus);

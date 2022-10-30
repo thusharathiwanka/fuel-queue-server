@@ -40,6 +40,20 @@ namespace fuel_queue_server.Controllers
             return fuelQueue;
         }
 
+        // GET api/<UserController>/5
+        // Handles - Get fuel queue for given fuel station id
+        [HttpGet("fuel-station/{id}")]
+        public ActionResult<FuelQueue> GetFuelQueueByFuelStationId(String id)
+        {
+            var fuelQueue = fuelQueueService.GetFuelQueueByFuelStationId(id);
+            if (fuelQueue == null)
+            {
+                return NotFound($"FuelQueue with Station Id = {id} not found");
+            }
+
+            return fuelQueue;
+        }
+
         // POST api/<UserController>
         // Handles - Register fuel queue
         [HttpPost]
@@ -85,6 +99,7 @@ namespace fuel_queue_server.Controllers
 
             return NoContent();
         }
+
 
         // DELETE api/<StudentController>/5
         // Handles - Delete fuel queue for given fuel queue id
