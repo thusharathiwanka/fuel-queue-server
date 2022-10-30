@@ -151,6 +151,16 @@ namespace fuel_queue_server.Services
         }
 
         /*
+        * Function - Retrieving fuel queue by fuel station id
+        * Params - id(string) - fuel station id to retrive
+        * Returns - FuelQueue fuelQueue object associated with id
+        */
+        public FuelQueue GetFuelQueueByFuelStationId(string id)
+        {
+            return _fuelQueue.Find(fuelQueue => fuelQueue.FuelStationId == id).FirstOrDefault();
+        }
+
+        /*
         * Function - Updating fuel queue
         * Params - id(string) - fuel queue id to retrive
         * Returns - FuelQueue fuel queue object associated with id
