@@ -52,6 +52,17 @@ namespace fuel_queue_server.Services
         }
 
         /*
+        * Function - Retrieving fuel stations of owner
+        * Params - id(string) - owner id to retrive
+        * Returns - List<FuelStation> list of fuel queue objects of certain owner
+        */
+        List<FuelStation> IFuelStationService.GetOwnerStations(string id)
+        {
+            return _fuelStation.Find(fuelStation => fuelStation.OwnerId == id).ToList();
+        }
+
+
+        /*
         * Function - Retrieving fuel station
         * Params - id(string) - fuel station id to retrive
         * Returns - FuelStation fuelStation object associated with id

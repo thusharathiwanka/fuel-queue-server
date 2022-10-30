@@ -17,6 +17,9 @@ namespace fuel_queue_server.Models
         [BsonElement("registrationNumber")]
         public String RegistrationNumber { get; set; } = String.Empty;
 
+        [BsonElement("ownerId")]
+        public string OwnerId { get; set; } = String.Empty;
+
         [BsonElement("name")]
         public string Name { get; set; } = String.Empty;
 
@@ -35,6 +38,6 @@ namespace fuel_queue_server.Models
         [BsonElement("finishTime")]
         public String FinishTime { get; set; } = String.Empty;
 
-        public FuelStation() { }
+        public FuelStation() {}
     }
 }
