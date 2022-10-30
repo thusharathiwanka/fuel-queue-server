@@ -9,6 +9,7 @@ namespace fuel_queue_server.Services
     {
         List<FuelStation> Get();
         FuelStation Get(string id);
+        List<FuelStation> GetOwnerStations(string id);
         FuelStation Create(FuelStation fuelStation);
         void Update(string id, FuelStation fuelStation);
         void Delete(string id);

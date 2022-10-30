@@ -40,6 +40,14 @@ namespace fuel_queue_server.Controllers
             return fuelStation;
         }
 
+        // GET api/<FuelStationController>/5
+        // Handles - Get fuel stations for given owner id
+        [HttpGet("owner/{id}")]
+        public ActionResult<List<FuelStation>> GetOwnerStations(String id)
+        {
+            return fuelStationService.GetOwnerStations(id);
+        }
+
         // POST api/<FuelStationController>
         // Handles - Register fuel station
         [HttpPost]
@@ -50,7 +58,7 @@ namespace fuel_queue_server.Controllers
         }
 
         // PUT api/<FuelStationController>/5
-        // Handles - Update fuel station for gievn fuel station id
+        // Handles - Update fuel station for given fuel station id
         [HttpPut("{id}")]
         public ActionResult Put(String id, [FromBody] FuelStation fuelStation)
         {
