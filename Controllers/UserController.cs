@@ -102,7 +102,7 @@ namespace MongoDBTestProject.Controllers
 
             userService.Delete(user.Id);
 
-            return Ok($"User with Id = {id} deleted");
+            return Ok(user);
         }
     }
 }
